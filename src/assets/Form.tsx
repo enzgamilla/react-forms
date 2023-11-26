@@ -19,7 +19,13 @@ const Form = () => {
   //     age: "",
   //   });
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  console.log(errors);
 
   const onSubmitData = (data: FieldValues) => {
     console.log(data);
@@ -36,11 +42,17 @@ const Form = () => {
           //     setPerson({ ...person, name: event.target.value });
           //   }}
           //   value={person.name}
-          {...register("name")}
+          {...register("name", { required: true, maxLength: 30 })}
           id="name"
           type="text"
           className="form-control"
         />
+        {errors.name?.type === "required" && (
+          <p id="error">The Name field is required</p>
+        )}
+        {errors.name?.type === "maxLength" && (
+          <p id="error">The must have only 30 characters</p>
+        )}
       </div>
       <div className="mb-3">
         <label htmlFor="age" className="form-label">
@@ -51,11 +63,17 @@ const Form = () => {
           //     setPerson({ ...person, age: event.target.value });
           //   }}
           //   value={person.age}
-          {...register("age")}
+          {...register("age", { required: true, min: 18 })}
           id="age"
           type="number"
           className="form-control"
         />
+        {errors.age?.type === "required" && (
+          <p id="error">The Name field is required</p>
+        )}
+        {errors.age?.type === "min" && (
+          <p id="error">The age must be 18 and above</p>
+        )}
       </div>
       <button className="btn btn-primary" type="submit">
         Submit
