@@ -8,8 +8,6 @@ function App() {
     age: 0,
   });
 
-  console.log(person);
-
   return (
     <div className="container">
       <Form></Form>
