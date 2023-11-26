@@ -12,8 +12,7 @@ const schema = z.object({
     .string()
     .max(30, { message: "The maximum character for name is 30" })
     .min(1, { message: "Name must not be empty" })
-    .toUpperCase()
-    .trim(),
+    .toUpperCase(),
   age: z
     .number({
       invalid_type_error: "Age field is required",
